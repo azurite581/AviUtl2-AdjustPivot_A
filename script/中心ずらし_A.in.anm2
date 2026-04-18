@@ -1,0 +1,62 @@
+--information:${INFO} ${VERSION} by ${AUTHOR}
+--label:${LABEL}
+---$select:位置
+---左上=1
+---上=2
+---右上=3
+---左=4
+---中心=5
+---右=6
+---左下=7
+---下=8
+---右下=9
+local coord = 5
+
+---$track:オフセットX
+---min=-4000
+---max=4000
+---step=0.01
+local offset_x = 0
+
+---$track:オフセットY
+---min=-4000
+---max=4000
+---step=0.01
+local offset_y = 0
+
+---$check:オブジェクトを移動
+local obj_move = false
+
+--group:その他,false
+---$value:PI
+local PI = {}
+--group
+
+coord = math.min(math.max(tonumber(PI[1]) or coord, 1), 9)
+offset_x = tonumber(PI[2]) or offset_x
+offset_y = tonumber(PI[3]) or offset_y
+if type(PI[4]) == "boolean" then obj_move = PI[4]
+elseif type(PI[4]) == "number" then obj_move = (PI[4] ~= 0)
+end
+
+local hw, hh = obj.w / 2, obj.h / 2
+local cx, cy = hw, hh
+local ox, oy = (obj_move and 0 or hw), (obj_move and 0 or hh)
+
+local offset = {
+    { -cx, -cy, -ox, -oy },
+    {   0, -cy,   0, -oy },
+    {  cx, -cy,  ox, -oy },
+    { -cx,   0, -ox,   0 },
+    {   0,   0,   0,   0 },
+    {  cx,   0,  ox,   0 },
+    { -cx,  cy, -ox,  oy },
+    {   0,  cy,   0,  oy },
+    {  cx,  cy,  ox,  oy },
+}
+
+cx, cy, ox, oy = unpack(offset[coord] or {0, 0, 0, 0})
+obj.cx = cx + offset_x
+obj.cy = cy + offset_y
+obj.ox = ox + (obj_move and 0 or offset_x)
+obj.oy = oy + (obj_move and 0 or offset_y)

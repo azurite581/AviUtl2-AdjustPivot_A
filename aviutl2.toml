@@ -1,0 +1,43 @@
+#:schema ./.aviutl2-cli/aviutl2.schema.json
+# 設定ファイルについては https://github.com/sevenc-nanashi/aviutl2-cli を参照してください。
+[project]
+id = "AdjustPivot_A"
+name = "中心ずらし_A"
+version = "0.1.0"
+
+[development]
+aviutl2_version = "latest"
+
+[artifacts.AdjustPivot_A-aux2]
+destination = "Plugin/中心ずらし_A.aux2"
+
+[artifacts.AdjustPivot_A-aux2.profiles.debug]
+build = "cargo build"
+source = "target/debug/中心ずらし_A.dll"
+
+[artifacts.AdjustPivot_A-aux2.profiles.release]
+build = "cargo build --release"
+source = "target/release/中心ずらし_A.dll"
+
+[artifacts.AdjustPivot_A-anm2]
+build = "aulua build"
+source = "script_out/中心ずらし_A.anm2"
+destination = "Script/中心ずらし_A.anm2"
+
+[artifacts.LICENSE-txt]
+source = "LICENSE.txt"
+destination = "License/LICENSE.txt"
+
+[artifacts.ThirdPartyLicenses-md]
+source = "ThirdPartyLicenses.md"
+destination = "License/ThirdPartyLicenses.md"
+
+[artifacts.FontLicense-txt]
+source = "assets/fonts/OFL.txt"
+destination = "License/OFL.txt"
+
+[preview]
+
+[release]
+output_dir = "release"
+package_template = "package.txt"

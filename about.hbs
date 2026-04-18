@@ -1,0 +1,30 @@
+# Third Party Licenses
+
+This page lists the licenses of the projects used in cargo-about.
+
+## Overview of licenses:
+
+{{#each overview}}
+- [{{name}}](#{{id}}) ({{count}})
+{{/each}}
+
+## All license text:
+
+{{#each licenses}}
+### <a id="{{id}}">{{name}}</a>
+
+#### Used by:
+
+{{#each used_by}}
+{{#if crate.repository}}
+- [{{crate.name}} {{crate.version}}]({{crate.repository}})
+{{else}}
+- [{{crate.name}} {{crate.version}}](https://crates.io/crates/{{crate.name}})
+{{/if}}
+{{/each}}
+
+~~~text
+{{text}}
+~~~
+
+{{/each}}
