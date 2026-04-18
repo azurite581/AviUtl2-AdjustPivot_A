@@ -1,5 +1,5 @@
 #![allow(non_snake_case)]
-use crate::gui::MyEguiApp;
+use crate::gui::EguiApp;
 use aviutl2::{config::translate as tr, generic::*};
 use aviutl2_eframe::EframeWindow;
 
@@ -13,11 +13,11 @@ pub static EDIT_HANDLE: aviutl2::generic::GlobalEditHandle =
     aviutl2::generic::GlobalEditHandle::new();
 
 #[aviutl2::plugin(GenericPlugin)]
-pub struct TestPluginRS {
+pub struct AdjustPivot {
     window: Option<EframeWindow>,
 }
 
-impl GenericPlugin for TestPluginRS {
+impl GenericPlugin for AdjustPivot {
     fn new(_info: aviutl2::AviUtl2Info) -> AnyResult<Self> {
         Ok(Self { window: None })
     }
@@ -36,7 +36,7 @@ impl GenericPlugin for TestPluginRS {
 
     fn register(&mut self, host: &mut HostAppHandle) {
         let eframe_window = EframeWindow::new(tr(PLUGIN_NAME).as_str(), |cc, handle| {
-            Ok(Box::new(MyEguiApp::new(cc, handle)))
+            Ok(Box::new(EguiApp::new(cc, handle)))
         });
 
         if let Ok(w) = eframe_window {
@@ -51,4 +51,4 @@ impl GenericPlugin for TestPluginRS {
     }
 }
 
-aviutl2::register_generic_plugin!(TestPluginRS);
+aviutl2::register_generic_plugin!(AdjustPivot);

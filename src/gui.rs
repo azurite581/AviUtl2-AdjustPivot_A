@@ -186,17 +186,18 @@ fn ensure_effect(
     Ok(())
 }
 
-pub struct MyEguiApp {
+pub struct EguiApp {
     pub _handle: AviUtl2EframeHandle,
     app_config: AppConfig,
 }
 
-impl MyEguiApp {
+impl EguiApp {
     pub fn new(cc: &eframe::CreationContext<'_>, frame_handle: AviUtl2EframeHandle) -> Self {
         let mut fonts = egui::FontDefinitions::default();
         fonts.font_data.insert(
             "NotoSansJP".to_owned(),
-            egui::FontData::from_static(include_bytes!("../assets/fonts/NotoSansJP-Regular.ttf")).into(),
+            egui::FontData::from_static(include_bytes!("../assets/fonts/NotoSansJP-Regular.ttf"))
+                .into(),
         );
         fonts
             .families
@@ -253,7 +254,11 @@ impl MyEguiApp {
                 .painter()
                 .layout_no_wrap(
                     slider_text.to_owned(),
-                    ui.style().text_styles.get(&egui::TextStyle::Body).unwrap().clone(),
+                    ui.style()
+                        .text_styles
+                        .get(&egui::TextStyle::Body)
+                        .unwrap()
+                        .clone(),
                     egui::Color32::WHITE,
                 )
                 .size()
@@ -298,7 +303,7 @@ impl MyEguiApp {
     }
 }
 
-impl eframe::App for MyEguiApp {
+impl eframe::App for EguiApp {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         let image_color = aviutl2_eframe::aviutl2_visuals().text_color();
 
@@ -381,12 +386,14 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/corner.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/corner.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color),
                                 ),
                             )
                             .clicked()
@@ -398,16 +405,15 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/side.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color)
-                                        .rotate(
-                                            std::f32::consts::FRAC_PI_2,
-                                            egui::Vec2::splat(0.5),
-                                        ),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/side.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color)
+                                    .rotate(std::f32::consts::FRAC_PI_2, egui::Vec2::splat(0.5)),
                                 ),
                             )
                             .clicked()
@@ -419,16 +425,15 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/corner.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color)
-                                        .rotate(
-                                            std::f32::consts::FRAC_PI_2,
-                                            egui::Vec2::splat(0.5),
-                                        ),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/corner.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color)
+                                    .rotate(std::f32::consts::FRAC_PI_2, egui::Vec2::splat(0.5)),
                                 ),
                             )
                             .clicked()
@@ -442,12 +447,14 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/side.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/side.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color),
                                 ),
                             )
                             .clicked()
@@ -459,12 +466,14 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/center.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/center.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color),
                                 ),
                             )
                             .clicked()
@@ -476,13 +485,15 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/side.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color)
-                                        .rotate(std::f32::consts::PI, egui::Vec2::splat(0.5)),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/side.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color)
+                                    .rotate(std::f32::consts::PI, egui::Vec2::splat(0.5)),
                                 ),
                             )
                             .clicked()
@@ -496,16 +507,15 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/corner.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color)
-                                        .rotate(
-                                            -std::f32::consts::FRAC_PI_2,
-                                            egui::Vec2::splat(0.5),
-                                        ),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/corner.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color)
+                                    .rotate(-std::f32::consts::FRAC_PI_2, egui::Vec2::splat(0.5)),
                                 ),
                             )
                             .clicked()
@@ -517,16 +527,15 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/side.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color)
-                                        .rotate(
-                                            -std::f32::consts::FRAC_PI_2,
-                                            egui::Vec2::splat(0.5),
-                                        ),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/side.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color)
+                                    .rotate(-std::f32::consts::FRAC_PI_2, egui::Vec2::splat(0.5)),
                                 ),
                             )
                             .clicked()
@@ -538,13 +547,15 @@ impl eframe::App for MyEguiApp {
                             .add_sized(
                                 button_size,
                                 egui::Button::image(
-                                    egui::Image::new(egui::include_image!("../assets/icons/corner.svg"))
-                                        .fit_to_exact_size(egui::Vec2::new(
-                                            button_size[0],
-                                            button_size[1],
-                                        ))
-                                        .tint(image_color)
-                                        .rotate(std::f32::consts::PI, egui::Vec2::splat(0.5)),
+                                    egui::Image::new(egui::include_image!(
+                                        "../assets/icons/corner.svg"
+                                    ))
+                                    .fit_to_exact_size(egui::Vec2::new(
+                                        button_size[0],
+                                        button_size[1],
+                                    ))
+                                    .tint(image_color)
+                                    .rotate(std::f32::consts::PI, egui::Vec2::splat(0.5)),
                                 ),
                             )
                             .clicked()
