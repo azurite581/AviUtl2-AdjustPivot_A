@@ -4197,7 +4197,7 @@ dependencies = [
 
 [[package]]
 name = "中心ずらし_A"
-version = "2.1.2"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "aviutl2",
