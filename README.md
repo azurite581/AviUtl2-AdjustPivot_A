@@ -1,6 +1,6 @@
 # 中心ずらし_A
 
-オブジェクトの中心座標を移動する [AviUtl2](https://spring-fragrance.mints.ne.jp/aviutl/) 用のスクリプトです。
+オブジェクトの中心座標を移動する [AviUtl2](https://spring-fragrance.mints.ne.jp/aviutl/) 用のスクリプトです。「スクリプト適用 → 位置指定」をワンボタン行うための GUI（汎用プラグイン）が付属しています。
 
 ## 動作環境
 
@@ -9,22 +9,30 @@
 
 ## 導入方法
 
+### AviUtl2 カタログを使う（推奨）
+
+本スクリプトは [aviutl2-catalog](https://github.com/Neosku/aviutl2-catalog) に登録済みです。 メインメニュー ＞ パッケージ一覧 ＞ スクリプト ＞ 中心ずらし_A からインストールしてください
+
 ### 手動インストール
 
 [Releases](https://github.com/azurite581/AviUtl2-AdjustPivot_A/releases/latest) から `AdjustPivot_A_v{version}.au2pkg.zip` をダウンロードし、AviUtl2 のプレビューにドラッグ&ドロップしてください。
+
+> [!NOTE]
+> ### For non-Japanese speaking users
+> Please download the translation files from [here](https://github.com/azurite581/aviutl2_translations_azurite/releases/latest). 
 
 ## 使い方
 
 ### スクリプト単体で使う場合
 
-1. フィルタ効果を追加 → 配置 → 中心ずらし_A を選択します。
+デフォルトでは `配置` カテゴリにあります。
+
+1. フィルタ効果を追加 → `配置` → `中心ずらし_A` を選択します。
 2. リストボックスから中心座標の位置を指定します。
 
 ### プラグインを使う場合
 
 ![中心ずらし_A_aux2](docs/images/中心ずらし_A_aux2.png)
-
-プラグインは「スクリプト適用 → 位置指定」を 1 ボタンで行うための GUI を提供するだけであり、動作に必須ではありません。
 
 #### 基本操作
 
