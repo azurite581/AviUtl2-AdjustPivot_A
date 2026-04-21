@@ -24,6 +24,7 @@ local offset_x = 0
 ---step=0.01
 local offset_y = 0
 
+--trackgroup@offset_x,offset_y:Group
 ---$check:オブジェクトを移動
 local obj_move = false
 
@@ -39,9 +40,10 @@ if type(PI[4]) == "boolean" then obj_move = PI[4]
 elseif type(PI[4]) == "number" then obj_move = (PI[4] ~= 0)
 end
 
+local sx, sy = obj.getvalue("scale")
 local hw, hh = obj.w / 2, obj.h / 2
 local cx, cy = hw, hh
-local ox, oy = (obj_move and 0 or hw), (obj_move and 0 or hh)
+local ox, oy = (obj_move and 0 or hw) * sx, (obj_move and 0 or hh) * sy
 
 local offset = {
     { -cx, -cy, -ox, -oy },
@@ -58,5 +60,5 @@ local offset = {
 cx, cy, ox, oy = unpack(offset[coord] or {0, 0, 0, 0})
 obj.cx = cx + offset_x
 obj.cy = cy + offset_y
-obj.ox = ox + (obj_move and 0 or offset_x)
-obj.oy = oy + (obj_move and 0 or offset_y)
+obj.ox = ox + (obj_move and 0 or offset_x * sx)
+obj.oy = oy + (obj_move and 0 or offset_y * sy)
