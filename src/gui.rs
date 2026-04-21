@@ -141,8 +141,13 @@ fn ensure_effect(
 ) -> Result<()> {
     let obj = edit_section
         .get_focused_object()
-        .context("get_focused_object failed")?
-        .context("No focused object")?;
+        .context("get_focused_object failed")?;
+    let obj = match obj {
+        Some(o) => o,
+        None => {
+            return Ok(());
+        }
+    };
     let object = edit_section.object(&obj);
     let mut alias = object.get_alias().context("get_alias failed")?;
     let effect_count = object
@@ -581,8 +586,16 @@ impl eframe::App for EguiApp {
 
                             let obj = edit_section
                                 .get_focused_object()
-                                .context("get_focused_object failed")?
-                                .context("No focused object")?;
+                                .context("get_focused_object failed")?;
+                            let obj = match obj {
+                                Some(o) => o,
+                                None => {
+                                    if cfg!(debug_assertions) {
+                                        aviutl2::lprintln!(warn, "No focused object");
+                                    }
+                                    return Ok(());
+                                }
+                            };
                             let object = edit_section.object(&obj);
                             let effect_count = object
                                 .count_effect(AppConfig::EFFECT_NAME)
@@ -619,7 +632,6 @@ impl eframe::App for EguiApp {
 
                             Ok(())
                         })();
-
                         if let Err(e) = result {
                             aviutl2::lprintln!(error, "error: {:?}", e);
                         }
