@@ -1,11 +1,11 @@
 # 中心ずらし_A
 
-オブジェクトの中心座標を移動する [AviUtl2](https://spring-fragrance.mints.ne.jp/aviutl/) 用のスクリプトです。「スクリプト適用 → 位置指定」をワンボタン行うための GUI（汎用プラグイン）が付属しています。
+オブジェクトの中心座標を移動する [AviUtl2](https://spring-fragrance.mints.ne.jp/aviutl/) 用のスクリプトです。「スクリプト適用 → 位置指定」をワンクリック行うための GUI（汎用プラグイン）が付属しています。
 
 ## 動作環境
 
 - [AviUtl ExEdit2](https://spring-fragrance.mints.ne.jp/aviutl/)  
-    `beta42` で動作確認済み。
+  `2.1.0` で動作確認済み。
 
 ## 導入方法
 
