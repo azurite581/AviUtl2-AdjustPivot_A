@@ -7,11 +7,10 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-anyhow = "1.0.102"
-aviutl2 = { version = "0.23.0", features = ["generic"] }
-aviutl2-eframe = "0.23.0"
-egui_extras = { version = "0.34.1", features = ["all_loaders"] }
+aviutl2 = { version = "0.39.0", features = ["generic"] }
+aviutl2-eframe = "0.39.0"
+egui_extras = { version = "0.35.0", features = ["all_loaders"] }
 iconify = "0.3.1"
-regex = "1.12.3"
+regex = "1.13.1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"

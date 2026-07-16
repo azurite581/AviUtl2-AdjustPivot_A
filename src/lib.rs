@@ -1,53 +1,47 @@
 #![allow(non_snake_case)]
-use crate::gui::EguiApp;
-use aviutl2::{config::translate as tr, generic::*};
-use aviutl2_eframe::EframeWindow;
 
 mod gui;
 mod settings;
+mod utils;
 
-const PLUGIN_NAME: &'static str = "中心ずらし_A";
-const PLUGIN_AUTHOR: &'static str = "azurite";
+use aviutl2::{config::translate as tr, generic::*};
 
 pub static EDIT_HANDLE: aviutl2::generic::GlobalEditHandle =
     aviutl2::generic::GlobalEditHandle::new();
 
 #[aviutl2::plugin(GenericPlugin)]
 pub struct AdjustPivot {
-    window: Option<EframeWindow>,
+    window: aviutl2_eframe::EframeWindow,
 }
 
 impl GenericPlugin for AdjustPivot {
     fn new(_info: aviutl2::AviUtl2Info) -> AnyResult<Self> {
-        Ok(Self { window: None })
+        let window =
+            aviutl2_eframe::EframeWindow::new(tr(gui::PLUGIN_NAME).as_str(), move |cc, handle| {
+                Ok(Box::new(gui::AdjustPivotApp::new(cc, handle)))
+            })?;
+        Ok(Self { window })
     }
 
     fn plugin_info(&self) -> GenericPluginTable {
-        let name = tr(PLUGIN_NAME);
+        let name = tr(gui::PLUGIN_NAME);
         let information = format!(
             "{} v{} {}",
-            PLUGIN_NAME,
+            gui::PLUGIN_NAME,
             env!("CARGO_PKG_VERSION"),
-            PLUGIN_AUTHOR
+            gui::PLUGIN_AUTHOR
         )
         .to_string();
         GenericPluginTable { name, information }
     }
 
-    fn register(&mut self, host: &mut HostAppHandle) {
-        let eframe_window = EframeWindow::new(tr(PLUGIN_NAME).as_str(), |cc, handle| {
-            Ok(Box::new(EguiApp::new(cc, handle)))
-        });
-
-        if let Ok(w) = eframe_window {
-            if let Ok(handle) = w.handle() {
-                let _ = host.register_window_client(tr(PLUGIN_NAME).as_str(), &handle);
-            }
-            self.window = Some(w);
+    fn register(&mut self, registry: &mut aviutl2::generic::HostAppHandle) {
+        if let Ok(handle) = self.window.handle() {
+            registry
+                .register_window_client(tr(gui::PLUGIN_NAME).as_str(), &handle)
+                .unwrap();
         }
-
-        let edit_handle = host.create_edit_handle();
-        EDIT_HANDLE.init(edit_handle);
+        EDIT_HANDLE.init(registry.create_edit_handle());
     }
 }
 

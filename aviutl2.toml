@@ -32,10 +32,6 @@ destination = "License/LICENSE.txt"
 source = "ThirdPartyLicenses.md"
 destination = "License/ThirdPartyLicenses.md"
 
-[artifacts.FontLicense-txt]
-source = "assets/fonts/OFL.txt"
-destination = "License/OFL.txt"
-
 [preview]
 
 [release]

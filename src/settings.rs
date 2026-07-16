@@ -1,8 +1,8 @@
-use anyhow::{Context, Result};
+use aviutl2::anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use std::fs;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub struct Settings {
     pub reset_offset: bool,
     pub button_scale: u32,
