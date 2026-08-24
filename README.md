@@ -5,7 +5,7 @@
 ## 動作環境
 
 - [AviUtl ExEdit2](https://spring-fragrance.mints.ne.jp/aviutl/)  
-  `2.1.0` で動作確認済み。
+  `2.1.6a` で動作確認済み。
 
 ## 導入方法
 
