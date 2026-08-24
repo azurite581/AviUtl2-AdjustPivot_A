@@ -4723,7 +4723,7 @@ dependencies = [
 
 [[package]]
 name = "中心ずらし_A"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "aviutl2",
  "aviutl2-eframe",
