@@ -89,7 +89,7 @@ pub fn ensure_effect(
             )
             .context("create_object_from_alias failed")?;
         edit_section
-            .focus_object(created_object)
+            .set_focus_object(Some(created_object))
             .context("focus_object failed")?;
     }
 

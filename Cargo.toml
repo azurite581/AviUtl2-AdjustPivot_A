@@ -7,9 +7,9 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-aviutl2 = { version = "0.39.0", features = ["generic"] }
-aviutl2-eframe = "0.39.0"
-egui_extras = { version = "0.35.0", features = ["all_loaders"] }
+aviutl2 = { version = "0.44.2", features = ["generic"] }
+aviutl2-eframe = "0.44.2"
+egui_extras = { version = "0.35.0", features = ["svg"] }
 iconify = "0.3.1"
 regex = "1.13.1"
 serde = { version = "1.0", features = ["derive"] }
