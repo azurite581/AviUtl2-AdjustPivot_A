@@ -27,7 +27,7 @@ impl GenericPlugin for AdjustPivot {
         let name = tr(gui::PLUGIN_NAME);
         let information = format!(
             "{} v{} {}",
-            gui::PLUGIN_NAME,
+            tr(gui::PLUGIN_NAME),
             env!("CARGO_PKG_VERSION"),
             gui::PLUGIN_AUTHOR
         )

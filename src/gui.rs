@@ -352,7 +352,7 @@ impl AdjustPivotApp {
                 );
                 ui.label(tr("情報"));
             });
-            ui.label(format!("{} v{}", PLUGIN_NAME, env!("CARGO_PKG_VERSION")));
+            ui.label(format!("{} v{}", tr(PLUGIN_NAME), env!("CARGO_PKG_VERSION")));
             ui.label(format!("(c) 2026 {}", PLUGIN_AUTHOR));
 
             use egui::special_emojis::GITHUB;
