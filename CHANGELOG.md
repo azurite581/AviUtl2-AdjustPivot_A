@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-08-24
+
+### Changed
+
+- aviutl2-rs、aviutl2-eframe を更新。
+
 ## [0.3.0] - 2026-07-16
 
 ### Changed
