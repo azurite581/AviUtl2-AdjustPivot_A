@@ -369,7 +369,7 @@ impl AdjustPivotApp {
                 "https://github.com/azurite581/AviUtl2-AdjustPivot_A",
             );
 
-            if ui.button("閉じる").clicked() {
+            if ui.button(tr("閉じる")).clicked() {
                 self.app_config.show_information_window = false;
             }
         });
