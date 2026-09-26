@@ -185,6 +185,23 @@ impl AdjustPivotApp {
                                     button_size,
                                     egui::Button::image(
                                         egui::Image::new(icon!(
+                                            "material-symbols:keyboard-arrow-up-rounded",
+                                            color = "white"
+                                        ))
+                                        .fit_to_exact_size(button_size),
+                                    )
+                                    .fill(egui::Color32::TRANSPARENT),
+                                )
+                                .clicked()
+                            {
+                                collapse_requested = true;
+                            }
+
+                            if ui
+                                .add_sized(
+                                    button_size,
+                                    egui::Button::image(
+                                        egui::Image::new(icon!(
                                             "material-symbols:info-outline-rounded",
                                             color = "white"
                                         ))
@@ -214,23 +231,6 @@ impl AdjustPivotApp {
                                 .clicked()
                             {
                                 self.app_config.show_settings_window = true;
-                            }
-
-                            if ui
-                                .add_sized(
-                                    button_size,
-                                    egui::Button::image(
-                                        egui::Image::new(icon!(
-                                            "material-symbols:keyboard-arrow-up-rounded",
-                                            color = "white"
-                                        ))
-                                        .fit_to_exact_size(button_size),
-                                    )
-                                    .fill(egui::Color32::TRANSPARENT),
-                                )
-                                .clicked()
-                            {
-                                collapse_requested = true;
                             }
                         });
                     });
