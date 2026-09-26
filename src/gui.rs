@@ -174,10 +174,11 @@ impl AdjustPivotApp {
                     ui.spacing_mut().item_spacing.x = UiConfig::HEADER_ITEM_SPACING;
                     ui.horizontal(|ui| {
                         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                            let button_size = egui::Vec2::new(
-                                UiConfig::HEADER_BUTTON_SIZE[0],
-                                UiConfig::HEADER_BUTTON_SIZE[1],
-                            );
+                            let button_size =
+                                egui::Vec2::new(
+                                    UiConfig::HEADER_BUTTON_SIZE[0],
+                                    UiConfig::HEADER_BUTTON_SIZE[1],
+                                );
 
                             if ui
                                 .add_sized(
@@ -264,42 +265,49 @@ impl AdjustPivotApp {
                 ui.label(tr("設定"));
             });
 
-            let _checkbox_res = ui.checkbox(
+            let _reset_offset_res = ui.checkbox(
                 &mut self.app_config.settings.reset_offset,
                 tr("変更時にオフセットをリセット"),
             );
 
-            let slider_text = tr("ボタンサイズ");
-            let text_width = ui
-                .painter()
-                .layout_no_wrap(
-                    slider_text.to_owned(),
-                    ui.style()
-                        .text_styles
-                        .get(&egui::TextStyle::Body)
-                        .unwrap()
-                        .clone(),
-                    egui::Color32::WHITE,
-                )
-                .size()
-                .x;
+            let _button_scale_fit_to_window_res = ui.checkbox(
+                &mut self.app_config.settings.button_scale_fit_to_window,
+                tr("ボタンサイズをウィンドウに合わせる"),
+            );
 
-            ui.scope(|ui| {
-                // スライダーをモーダルウィンドウに収めるために幅を調整
-                ui.spacing_mut().slider_width = f32::max(
-                    0.0,
-                    width
-                        - ui.spacing().interact_size.x
-                        - ui.spacing().button_padding.x
-                        - text_width,
-                );
-                ui.add(
-                    egui::Slider::new(
-                        &mut self.app_config.settings.button_scale,
-                        UiConfig::BUTTON_SCALE_MIN..=UiConfig::BUTTON_SCALE_MAX,
+            ui.add_enabled_ui(!self.app_config.settings.button_scale_fit_to_window, |ui| {
+                let slider_text = tr("ボタンサイズ");
+                let text_width = ui
+                    .painter()
+                    .layout_no_wrap(
+                        slider_text.to_owned(),
+                        ui.style()
+                            .text_styles
+                            .get(&egui::TextStyle::Body)
+                            .unwrap()
+                            .clone(),
+                        egui::Color32::WHITE,
                     )
-                    .text(slider_text),
-                );
+                    .size()
+                    .x;
+
+                ui.scope(|ui| {
+                    // スライダーをモーダルウィンドウに収めるために幅を調整
+                    ui.spacing_mut().slider_width = f32::max(
+                        0.0,
+                        width
+                            - ui.spacing().interact_size.x
+                            - ui.spacing().button_padding.x
+                            - text_width,
+                    );
+                    ui.add(
+                        egui::Slider::new(
+                            &mut self.app_config.settings.button_scale,
+                            UiConfig::BUTTON_SCALE_MIN..=UiConfig::BUTTON_SCALE_MAX,
+                        )
+                        .text(slider_text),
+                    );
+                });
             });
 
             let button_w = UiConfig::COORD_BUTTON_SIZE[0]
@@ -382,7 +390,21 @@ impl eframe::App for AdjustPivotApp {
 
         egui::CentralPanel::default().show(ui, |ui| {
             ui.scope(|ui| {
-                let button_size = self.app_config.coord_button_size;
+                let button_size = if self.app_config.settings.button_scale_fit_to_window {
+                    const BUTTON_NUM: i32 = 3;
+                    let avail_min = ui.available_width().min(ui.available_height()) - UiConfig::GRID_SPACING[0] * (BUTTON_NUM - 1) as f32;
+                    let size = (avail_min / BUTTON_NUM as f32).max(UiConfig::COORD_BUTTON_SIZE[0] as f32);
+                    egui::Vec2::new(
+                        size,
+                        size,
+                    )
+                } else {
+                    egui::Vec2::new(
+                        self.app_config.coord_button_size[0] as f32,
+                        self.app_config.coord_button_size[1] as f32,
+                    )
+                };
+
                 ui.style_mut().spacing.button_padding = egui::vec2(
                     UiConfig::COORD_BUTTON_PADDING[0],
                     UiConfig::COORD_BUTTON_PADDING[1],

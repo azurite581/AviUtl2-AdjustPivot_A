@@ -5,6 +5,7 @@ use std::fs;
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub struct Settings {
     pub reset_offset: bool,
+    pub button_scale_fit_to_window: bool,
     pub button_scale: u32,
 }
 
@@ -12,6 +13,7 @@ impl Settings {
     pub fn new() -> Self {
         Self {
             reset_offset: true,
+            button_scale_fit_to_window: false,
             button_scale: 100,
         }
     }
